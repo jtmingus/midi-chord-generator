@@ -1,4 +1,4 @@
-import { NoteId, RawNoteId, Octave } from "./types";
+import { NoteId, RawNoteId, Octave, NOTE_ID_TO_STRING } from "./types";
 
 // Start with ID 0 = A0, 1 = A#0, etc.
 const MIN_NOTE_ID = 0;
@@ -31,11 +31,18 @@ export class Note {
     return (this.rawNoteId % 12) as NoteId;
   }
 
-  increaseBySemitones(semitones: number) {
+  transposeBySemitones(semitones: number) {
     const newRawNoteId = this.rawNoteId + semitones;
     validateRawNoteId(newRawNoteId);
 
     this.rawNoteId = newRawNoteId;
+  }
+
+  /** Get the string midi notation for the current note; i.e., C4, G#3. */
+  getMidiNotation() {
+    const noteId = this.getNoteId();
+    const noteStr = NOTE_ID_TO_STRING.get(noteId);
+    return `${noteStr}${this.getOctave()}`;
   }
 
   static buildFromNoteIdAndOctave(noteId: NoteId, octave: Octave): Note {

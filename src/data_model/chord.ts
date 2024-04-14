@@ -41,7 +41,7 @@ export class Chord {
       } else {
         // Raise the note an octave
         const noteToAdd = this.notes[i];
-        noteToAdd.increaseBySemitones(12);
+        noteToAdd.transposeBySemitones(12);
         notesPostInversion.push(noteToAdd);
       }
     }

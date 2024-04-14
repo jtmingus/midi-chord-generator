@@ -18,6 +18,21 @@ export enum NoteId {
 }
 export type ChordId = NoteId;
 
+export const NOTE_ID_TO_STRING = new Map([
+  [NoteId.A, "A"],
+  [NoteId.A_SHARP, "A#"],
+  [NoteId.B, "B"],
+  [NoteId.C, "C"],
+  [NoteId.C_SHARP, "C#"],
+  [NoteId.D, "D"],
+  [NoteId.D_SHARP, "D#"],
+  [NoteId.E, "E"],
+  [NoteId.F, "F"],
+  [NoteId.F_SHARP, "F#"],
+  [NoteId.G, "G"],
+  [NoteId.G_SHARP, "G#"],
+]);
+
 export interface NoteKey {
   noteId: NoteId;
   octave: Octave;
@@ -42,5 +57,5 @@ export enum ChordType {
 // TODO: Could add other modifiers like density of notes, dropped bass,
 // randomness, etc.
 export interface ChordOptions {
-  inversion: Inversion;
+  inversion?: Inversion;
 }
