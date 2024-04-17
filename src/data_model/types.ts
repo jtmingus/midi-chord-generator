@@ -3,20 +3,20 @@ export type Inversion = number;
 export type Octave = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export enum NoteId {
-  A = 0,
-  A_SHARP = 1,
-  B = 2,
-  C = 3,
-  C_SHARP = 4,
-  D = 5,
-  D_SHARP = 6,
-  E = 7,
-  F = 8,
-  F_SHARP = 9,
-  G = 10,
-  G_SHARP = 11,
+  C = 0,
+  C_SHARP = 1,
+  D = 2,
+  D_SHARP = 3,
+  E = 4,
+  F = 5,
+  F_SHARP = 6,
+  G = 7,
+  G_SHARP = 8,
+  A = 9,
+  A_SHARP = 10,
+  B = 11,
 }
-export type ChordId = NoteId;
+export const ChordId = NoteId;
 
 export const NOTE_ID_TO_STRING = new Map([
   [NoteId.A, "A"],
