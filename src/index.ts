@@ -10,8 +10,27 @@ const chords = [
   new Chord(NoteId.E, ChordType.MIN_VII),
 ];
 
+let player: ChordPlayer | undefined;
+
 const playButton = document.querySelector("#play-button");
 playButton?.addEventListener("click", () => {
-  const player = new ChordPlayer();
+  player = player ?? new ChordPlayer();
   player.playChords(chords);
 });
+
+let writer: MidiChordWriter | undefined;
+const downloadButton = document.querySelector("#download-button");
+downloadButton?.addEventListener("click", () => {
+  writer = writer ?? new MidiChordWriter();
+  const uri = writer.writeChords(chords);
+  download(uri);
+});
+
+let downloadLinkEl: HTMLAnchorElement | undefined;
+function download(uri: string) {
+  downloadLinkEl = downloadLinkEl ?? document.createElement("a");
+  downloadLinkEl.href = uri;
+  // TODO: Update file name to include chords.
+  downloadLinkEl.download = "Midi";
+  downloadLinkEl.click();
+}

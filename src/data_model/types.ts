@@ -2,6 +2,8 @@ export type RawNoteId = number;
 export type Inversion = number;
 export type Octave = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
+// Reference: https://www.pianote.com/blog/chord-symbols-piano/
+
 export enum NoteId {
   C = 0,
   C_SHARP = 1,
@@ -53,6 +55,22 @@ export enum ChordType {
   SUS_IV,
   VI,
 }
+
+export const CHORD_TYPE_TO_LABEL = new Map([
+  [ChordType.MAJ, "maj"],
+  [ChordType.MIN, "m"],
+  [ChordType.VII, "7"],
+  [ChordType.MAJ_VII, "maj7"],
+  [ChordType.MIN_VII, "m7"],
+  [ChordType.MAJ_IX, "maj9"],
+  [ChordType.MIN_IX, "m9"],
+  [ChordType.MIN_XI, "m11"],
+  [ChordType.DIMINISHED, "dim"],
+  [ChordType.AUGMENTED, "aug"],
+  [ChordType.SUS_II, "sus2"],
+  [ChordType.SUS_IV, "sus4"],
+  [ChordType.VI, "6"],
+]);
 
 // TODO: Could add other modifiers like density of notes, dropped bass,
 // randomness, etc.

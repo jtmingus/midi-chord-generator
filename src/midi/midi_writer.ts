@@ -1,11 +1,11 @@
 import MidiWriter from "midi-writer-js";
 import { Chord } from "../data_model/chord";
-import { Note } from "../data_model/note";
 
 export class MidiChordWriter {
   constructor() {}
 
-  writeChords(chords: Chord[]) {
+  /** Returns the data URI for the MIDI. */
+  writeChords(chords: Chord[]): string {
     // Start with a new track
     const track = new MidiWriter.Track();
 
@@ -29,5 +29,6 @@ export class MidiChordWriter {
     // Generate a data URI
     const write = new MidiWriter.Writer(track);
     console.log(write.dataUri());
+    return write.dataUri();
   }
 }
