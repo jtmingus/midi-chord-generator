@@ -77,3 +77,40 @@ export const CHORD_TYPE_TO_LABEL = new Map([
 export interface ChordOptions {
   inversion?: Inversion;
 }
+
+// TODO: Decide if we want to use this.
+export enum ChordQuality {
+  Major = "major",
+  Minor = "minor",
+  Augmented = "augmented",
+  Diminished = "diminished",
+  Dominant7th = "dominant7th",
+  Major7th = "major7th",
+  Minor7th = "minor7th",
+  HalfDiminished7th = "halfDiminished7th",
+  FullyDiminished7th = "fullyDiminished7th",
+  SuspendedFourth = "suspendedFourth",
+  SuspendedSecond = "suspendedSecond",
+  AddNinth = "addNinth",
+  AddEleventh = "addEleventh",
+  AddThirteenth = "addThirteenth",
+  Ninth = "ninth",
+  Eleventh = "eleventh",
+  Thirteenth = "thirteenth",
+  MajorSixth = "majorSixth",
+  MinorSixth = "minorSixth",
+  Dominant7thFlat5 = "dominant7thFlat5",
+  Minor7thFlat5 = "minor7thFlat5", // maybe remove
+  Dominant7thSharp5 = "dominant7thSharp5",
+  Minor7thSharp5 = "minor7thSharp5",
+  // HalfDiminished7thSharp5 = "halfDiminished7thSharp5",
+  // FullyDiminished7thSharp5 = "fullyDiminished7thSharp5",
+  // AddNinthSharp5 = "addNinthSharp5",
+  // AddEleventhSharp5 = "addEleventhSharp5",
+  // AddThirteenthSharp5 = "addThirteenthSharp5",
+  // NinthSharp5 = "ninthSharp5",
+  // EleventhSharp5 = "eleventhSharp5",
+  // ThirteenthSharp5 = "thirteenthSharp5",
+  // MajorSixthSharp5 = "majorSixthSharp5",
+  // MinorSixthSharp5 = "minorSixthSharp5",
+}
