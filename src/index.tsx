@@ -2,6 +2,11 @@ import { Chord } from "./data_model/chord";
 import { MidiChordWriter } from "./midi/midi_writer";
 import { ChordPlayer } from "./player/player";
 import { NoteId, ChordType } from "./data_model/types";
+import { createRoot } from 'react-dom/client';
+import App from './app/App';
+
+const root = createRoot(document.getElementById('root')!);
+root.render(<App />);
 
 const chords = [
   new Chord(NoteId.C, ChordType.MAJ_VII),

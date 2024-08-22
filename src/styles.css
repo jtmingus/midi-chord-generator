@@ -4,34 +4,3 @@ body {
   flex-direction: column;
   font-family: sans-serif;
 }
-
-.staff {
-  align-items: center;
-  border: 1px solid black;
-  display: flex;
-  flex-direction: row;
-  height: 100px;
-  justify-content: center;
-  position: relative;
-  width: 400px;
-}
-
-.chord-select {
-  display: inline-block;
-}
-
-.chord-select select {
-  border-radius: 5px;
-  border: 1px solid black;
-  display: inline-block;
-  padding: 5px;
-}
-
-#play-button, #download-button {
-  border-radius: 5px;
-  border: 1px solid black;
-  cursor: pointer;
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-}
