@@ -2,10 +2,12 @@ import MidiWriter from "midi-writer-js";
 import { Chord } from "../data_model/chord";
 
 export class MidiChordWriter {
+  private static downloadLinkEl?: HTMLAnchorElement;
+
   constructor() {}
 
-  /** Returns the data URI for the MIDI. */
-  writeChords(chords: Chord[]): string {
+  /** Downloads chords as MIDI. */
+  static writeChords(chords: Chord[]) {
     // Start with a new track
     const track = new MidiWriter.Track();
 
@@ -28,7 +30,14 @@ export class MidiChordWriter {
 
     // Generate a data URI
     const write = new MidiWriter.Writer(track);
-    console.log(write.dataUri());
-    return write.dataUri();
+    this.download(write.dataUri());
+  }
+
+  private static download(uri: string) {
+    this.downloadLinkEl = this.downloadLinkEl ?? document.createElement("a");
+    this.downloadLinkEl.href = uri;
+    // TODO: Update file name to include chords.
+    this.downloadLinkEl.download = "Midi";
+    this.downloadLinkEl.click();
   }
 }

@@ -1,4 +1,11 @@
-import { NoteId, RawNoteId, Octave, NOTE_ID_TO_STRING } from "./types";
+import {
+  NoteId,
+  RawNoteId,
+  Octave,
+  noteIdToRawNoteId,
+  getNoteIdFromRawNoteId,
+  NOTE_ID_TO_MIDI_STRING,
+} from "./types";
 
 // Start with ID 0 = A0, 1 = A#0, etc.
 const MIN_NOTE_ID = 0;
@@ -28,7 +35,7 @@ export class Note {
   }
 
   getNoteId(): NoteId {
-    return (this.rawNoteId % 12) as NoteId;
+    return getNoteIdFromRawNoteId(this.rawNoteId % 12);
   }
 
   transposeBySemitones(semitones: number) {
@@ -41,7 +48,7 @@ export class Note {
   /** Get the string midi notation for the current note; i.e., C4, G#3. */
   getMidiNotation() {
     const noteId = this.getNoteId();
-    const noteStr = NOTE_ID_TO_STRING.get(noteId);
+    const noteStr = NOTE_ID_TO_MIDI_STRING.get(noteId);
     return `${noteStr}${this.getOctave()}`;
   }
 
@@ -49,10 +56,11 @@ export class Note {
     if (octave < 0 || octave >= 8) {
       throw Error("Invalid octave");
     }
-    if (noteId < 0 || noteId > 11) {
+    const rawNoteId = noteIdToRawNoteId(noteId);
+    if (rawNoteId < 0 || rawNoteId > 11) {
       throw Error("Invalid note id");
     }
 
-    return new Note((octave * 12 + noteId) as number);
+    return new Note((octave * 12 + rawNoteId) as number);
   }
 }

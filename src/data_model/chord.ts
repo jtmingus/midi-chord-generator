@@ -8,15 +8,23 @@ export class Chord {
   private static DEFAULT_OCTAVE = 3 as Octave;
 
   // TODO: Move ChordOptions to constructor and to setter function.
-  constructor(private chord: NoteId, private chordType: ChordType) {
+  constructor(private chordBase: NoteId, private chordType: ChordType) {
     this.notes = this.buildNotes();
+  }
+
+  getChordBase(): NoteId {
+    return this.chordBase;
+  }
+
+  getChordType(): ChordType {
+    return this.chordType;
   }
 
   private buildNotes(): Note[] {
     const relativeSemitones =
       CHORD_TYPE_TO_RELATIVE_SEMITONE_LIST.get(this.chordType) || [];
     const rootNote = Note.buildFromNoteIdAndOctave(
-      this.chord,
+      this.chordBase,
       Chord.DEFAULT_OCTAVE
     );
     const rootRawId = rootNote.getRawNoteId();
