@@ -4,3 +4,7 @@ body {
   flex-direction: column;
   font-family: sans-serif;
 }
+
+header {
+  text-align: center;
+}
