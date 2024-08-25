@@ -7,12 +7,27 @@ const NUM_CHORDS = 4;
 interface ChordListProps {
   chords: Chord[];
   setChords: Dispatch<Chord[]>;
+  lockedIds: Set<number>;
+  setLockedIds: Dispatch<Set<number>>;
 }
-export default function ChordList({ chords, setChords }: ChordListProps) {
+export default function ChordList({
+  chords,
+  setChords,
+  lockedIds,
+  setLockedIds,
+}: ChordListProps) {
   const updateChord = (index: number, chord: Chord) => {
     setChords(
       chords.map((existingChord, i) => (i == index ? chord : existingChord))
     );
+  };
+  const setLocked = (index: number, locked: boolean) => {
+    if (locked) {
+      lockedIds.add(index);
+    } else {
+      lockedIds.delete(index);
+    }
+    setLockedIds(new Set([...lockedIds]));
   };
 
   const chordPickers = [];
@@ -22,6 +37,10 @@ export default function ChordList({ chords, setChords }: ChordListProps) {
         key={i}
         chord={chords[i]}
         setChord={(chord) => updateChord(i, chord)}
+        locked={lockedIds.has(i)}
+        setLocked={(isLocked) => {
+          setLocked(i, isLocked);
+        }}
       />
     );
   }

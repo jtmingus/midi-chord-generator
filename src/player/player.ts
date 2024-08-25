@@ -32,8 +32,8 @@ export class ChordPlayer {
 
       this.synth.triggerAttackRelease(
         midiNotationNotes,
-        // Play each of the four chords for 1 measure.
-        ["1m", "1m", "1m", "1m"],
+        // Play each note for 1 measure.
+        midiNotationNotes.map(() => "1m"),
         `+${delayMeasures}m`
       );
 

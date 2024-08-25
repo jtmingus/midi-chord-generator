@@ -26,16 +26,27 @@ export default function ControlButtons({
   }
 
   return (
-    <div className="grid" style={{ marginTop: "1rem" }}>
+    <div className="grid" style={{ marginBottom: "1rem" }}>
       <button onClick={play} disabled={isPlaying}>
+        <i className="fa-solid fa-play" style={{ marginRight: "0.5rem" }}></i>
         Play
       </button>
-      <button onClick={download}>Download Midi</button>
+      <button onClick={download}>
+        <i
+          className="fa-solid fa-download"
+          style={{ marginRight: "0.5rem" }}
+        ></i>
+        Download Midi
+      </button>
       <button
         onClick={() => {
           randomize();
         }}
       >
+        <i
+          className="fa-solid fa-shuffle"
+          style={{ marginRight: "0.5rem" }}
+        ></i>
         Randomize all
       </button>
     </div>
