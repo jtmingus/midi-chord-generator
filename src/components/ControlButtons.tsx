@@ -5,7 +5,13 @@ import { ChordPlayer } from "../player/player";
 
 const player = new ChordPlayer();
 
-export default function ControlButtons({ chords }: { chords: Chord[] }) {
+export default function ControlButtons({
+  chords,
+  randomize,
+}: {
+  chords: Chord[];
+  randomize: Function;
+}) {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   function play() {
@@ -25,6 +31,13 @@ export default function ControlButtons({ chords }: { chords: Chord[] }) {
         Play
       </button>
       <button onClick={download}>Download Midi</button>
+      <button
+        onClick={() => {
+          randomize();
+        }}
+      >
+        Randomize all
+      </button>
     </div>
   );
 }

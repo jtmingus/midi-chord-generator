@@ -5,7 +5,7 @@ import { Note } from "./note";
 export class Chord {
   private notes: Note[];
 
-  private static DEFAULT_OCTAVE = 3 as Octave;
+  private static DEFAULT_OCTAVE = 4 as Octave;
 
   constructor(private chordOptions: ChordOptions) {
     this.notes = this.buildNotes();
@@ -27,6 +27,10 @@ export class Chord {
 
   getInversion(): Inversion {
     return this.chordOptions.inversion ?? Inversion.ROOT;
+  }
+
+  isOpenVoicing(): boolean {
+    return !!this.chordOptions.openVoicing;
   }
 
   private buildNotes(): Note[] {
@@ -78,7 +82,7 @@ export class Chord {
     if (inversion == 0) {
       return notes;
     }
-    const notesPostInversion: Note[] = [];
+    let notesPostInversion: Note[] = [];
     for (let i = notes.length - 1; i >= 0; i--) {
       if (i > inversion) {
         notesPostInversion.unshift(notes[i]);
@@ -90,9 +94,17 @@ export class Chord {
       }
     }
 
+    if (notesPostInversion[0].getRawNoteId() / 12 >= 5) {
+      notesPostInversion = notes.map((note) => {
+        note.transposeBySemitones(-12);
+        return note;
+      });
+    }
+
     return notesPostInversion;
   }
 
+  /** TODO: Decide how to handle open voicings. */
   private modifyVoicing(notes: Note[]) {
     if (!notes.length) return notes;
     const rootRawId = notes[0].getRawNoteId();
@@ -102,6 +114,19 @@ export class Chord {
       for (let note of notes) {
         while (note.getRawNoteId() - rootRawId >= 12) {
           note.transposeBySemitones(-12);
+        }
+      }
+    } else {
+      notes[0].transposeBySemitones(-12);
+      for (let i = 1; i < notes.length; i++) {
+        if (notes[i].getRawNoteId() - rootRawId >= 12) {
+          // -12 or 0.
+          const toTranspose = (Math.floor(Math.random() * 2) - 1) * 12;
+          notes[i].transposeBySemitones(toTranspose);
+        } else {
+          // +/- 12 semitones.
+          const toTranspose = (Math.floor(Math.random() * 3) - 1) * 12;
+          notes[i].transposeBySemitones(toTranspose);
         }
       }
     }

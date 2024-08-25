@@ -74,6 +74,7 @@ export default function ChordPicker({ chord, setChord }: ChordPickerProps) {
       <label style={styles.select}>
         <input
           type="checkbox"
+          checked={chord.isOpenVoicing()}
           onChange={(e) => {
             updateChord({ openVoicing: e.target.checked });
           }}

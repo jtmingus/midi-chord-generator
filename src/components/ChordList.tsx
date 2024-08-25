@@ -9,7 +9,6 @@ interface ChordListProps {
   setChords: Dispatch<Chord[]>;
 }
 export default function ChordList({ chords, setChords }: ChordListProps) {
-  console.log("initialize chord list", chords);
   const updateChord = (index: number, chord: Chord) => {
     setChords(
       chords.map((existingChord, i) => (i == index ? chord : existingChord))
@@ -20,7 +19,7 @@ export default function ChordList({ chords, setChords }: ChordListProps) {
   for (let i = 0; i < chords.length; i++) {
     chordPickers.push(
       <ChordPicker
-        key={chords[i].getChordBase() + chords[i].getChordType()}
+        key={i}
         chord={chords[i]}
         setChord={(chord) => updateChord(i, chord)}
       />

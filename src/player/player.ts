@@ -12,7 +12,7 @@ export class ChordPlayer {
     const limiter = new Tone.Limiter();
     this.synth.connect(limiter);
     this.synth.set({
-      oscillator: { type: "sine", volume: -10 },
+      oscillator: { type: "sine", volume: -12 },
     });
 
     // If debugging is needed, uncomment the line below.
