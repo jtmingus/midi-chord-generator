@@ -27,7 +27,7 @@ export class ChordPlayer {
     let delayMeasures = 0;
     for (const chord of chords) {
       const midiNotationNotes = chord
-        .getAllNotes({})
+        .getAllNotes()
         .map((note) => note.getMidiNotation());
 
       this.synth.triggerAttackRelease(

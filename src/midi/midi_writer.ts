@@ -16,7 +16,7 @@ export class MidiChordWriter {
 
     const offset: number[] = [];
     for (const chord of chords) {
-      const notes = chord.getAllNotes({});
+      const notes = chord.getAllNotes();
       track.addEvent(
         new MidiWriter.NoteEvent({
           pitch: notes.map((note) => note.getMidiNotation()),

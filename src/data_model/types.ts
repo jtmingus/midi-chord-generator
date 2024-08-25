@@ -1,4 +1,3 @@
-export type Inversion = number;
 export type Octave = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 // Reference: https://www.pianote.com/blog/chord-symbols-piano/
@@ -94,8 +93,24 @@ export const CHORD_TYPE_TO_LABEL = new Map([
   [ChordType.VI, "6"],
 ]);
 
+export enum Inversion {
+  ROOT = "root",
+  FIRST = "first",
+  SECOND = "second",
+}
+export const INVERSION_TO_LABEL = new Map([
+  [Inversion.ROOT, "Root"],
+  [Inversion.FIRST, "First"],
+  [Inversion.SECOND, "Second"],
+]);
+
 // TODO: Could add other modifiers like density of notes, dropped bass,
 // randomness, etc.
 export interface ChordOptions {
+  // Root note of the chord.
+  chordBase: NoteId;
+  chordType: ChordType;
   inversion?: Inversion;
+  // Whether or not the chord should be open (i.e. spanning >1 octave).
+  openVoicing?: boolean;
 }

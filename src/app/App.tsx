@@ -5,10 +5,10 @@ import { ChordType, NoteId } from "../data_model/types";
 import { useState } from "react";
 
 const DEFAULT_CHORDS = [
-  new Chord(NoteId.C, ChordType.MAJ_VII),
-  new Chord(NoteId.D, ChordType.MIN_IX),
-  new Chord(NoteId.F, ChordType.VI),
-  new Chord(NoteId.E, ChordType.MIN_VII),
+  new Chord({ chordBase: NoteId.C, chordType: ChordType.MAJ_VII }),
+  new Chord({ chordBase: NoteId.D, chordType: ChordType.MIN_IX }),
+  new Chord({ chordBase: NoteId.F, chordType: ChordType.VI }),
+  new Chord({ chordBase: NoteId.E, chordType: ChordType.MIN_VII }),
 ];
 
 export default function App() {
