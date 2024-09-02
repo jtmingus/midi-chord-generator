@@ -74,7 +74,8 @@ export enum ChordType {
   AUGMENTED = "aug",
   SUS_II = "sus_ii",
   SUS_IV = "sus_iv",
-  VI = "vi",
+  MAJ_VI = "maj_vi",
+  MIN_VI = "min_vi",
 }
 
 export const CHORD_TYPE_TO_LABEL = new Map([
@@ -90,7 +91,8 @@ export const CHORD_TYPE_TO_LABEL = new Map([
   [ChordType.AUGMENTED, "aug"],
   [ChordType.SUS_II, "sus2"],
   [ChordType.SUS_IV, "sus4"],
-  [ChordType.VI, "6"],
+  [ChordType.MAJ_VI, "6"],
+  [ChordType.MIN_VI, "m6"],
 ]);
 
 export enum Inversion {

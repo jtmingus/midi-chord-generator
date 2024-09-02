@@ -8,7 +8,7 @@ import { useState } from "react";
 const DEFAULT_CHORDS = [
   new Chord({ chordBase: NoteId.C, chordType: ChordType.MAJ_VII }),
   new Chord({ chordBase: NoteId.D, chordType: ChordType.MIN_IX }),
-  new Chord({ chordBase: NoteId.F, chordType: ChordType.VI }),
+  new Chord({ chordBase: NoteId.F, chordType: ChordType.MAJ_VI }),
   new Chord({ chordBase: NoteId.E, chordType: ChordType.MIN_VII }),
 ];
 

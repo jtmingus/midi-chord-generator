@@ -16,5 +16,6 @@ export const CHORD_TYPE_TO_RELATIVE_SEMITONE_LIST: Map<
   [ChordType.AUGMENTED, [0, 4, 8]], // Augmented chord: root, major third, augmented fifth
   [ChordType.SUS_II, [0, 2, 7]], // Suspended second chord: root, major second, perfect fifth
   [ChordType.SUS_IV, [0, 5, 7]], // Suspended fourth chord: root, major fourth, perfect fifth
-  [ChordType.VI, [0, 4, 7, 9]], // Sixth chord: root, major third, major fifth, major sixth
+  [ChordType.MAJ_VI, [0, 4, 7, 9]], // Sixth chord: root, major third, major fifth, major sixth
+  [ChordType.MIN_VI, [0, 3, 7, 9]], // Sixth chord: root, major third, major fifth, major sixth
 ]);

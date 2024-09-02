@@ -51,6 +51,7 @@ export class Chord {
     notes = this.modifyInversion(notes);
     notes = this.modifyVoicing(notes);
 
+    console.log("modified");
     for (const note of notes) {
       console.log(note.getMidiNotation());
     }
@@ -117,15 +118,21 @@ export class Chord {
         }
       }
     } else {
-      notes[0].transposeBySemitones(-12);
-      for (let i = 1; i < notes.length; i++) {
-        if (notes[i].getRawNoteId() - rootRawId >= 12) {
+      // Double root an octave below.
+      const newRoot = new Note(notes[0].getRawNoteId() - 12);
+      notes.unshift(newRoot);
+      for (let i = 2; i < notes.length; i++) {
+        const currRawId = notes[i].getRawNoteId();
+        if (currRawId - rootRawId >= 12) {
           // -12 or 0.
           const toTranspose = (Math.floor(Math.random() * 2) - 1) * 12;
           notes[i].transposeBySemitones(toTranspose);
+        } else if (currRawId - rootRawId >= 9 || currRawId - rootRawId == 7) {
+          // Don't transpose notes that are between 9 and 12 semitones above the root and don't transpose the 5th.
+          continue;
         } else {
           // +/- 12 semitones.
-          const toTranspose = (Math.floor(Math.random() * 3) - 1) * 12;
+          let toTranspose = (Math.floor(Math.random() * 3) - 1) * 12;
           notes[i].transposeBySemitones(toTranspose);
         }
       }
