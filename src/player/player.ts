@@ -4,16 +4,25 @@ import { Chord } from "../data_model/chord";
 const BPM = 160;
 
 export class ChordPlayer {
-  private readonly synth: Tone.PolySynth;
+  private readonly synth: Tone.Sampler;
   constructor() {
     // TODO: Decide if user should be able to change the tempo.
     Tone.Transport.bpm.value = BPM;
-    this.synth = new Tone.PolySynth(Tone.Synth).toDestination();
+    this.synth = new Tone.Sampler({
+      C2: "samples/C2.mp3",
+      "F#2": "samples/Fsharp2.mp3",
+      C3: "samples/C3.mp3",
+      "F#3": "samples/Fsharp3.mp3",
+      C4: "samples/C4.mp3",
+      "F#4": "samples/Fsharp4.mp3",
+      C5: "samples/C5.mp3",
+    }).toDestination();
     const limiter = new Tone.Limiter();
     this.synth.connect(limiter);
-    this.synth.set({
-      oscillator: { type: "sine", volume: -12 },
-    });
+    // this.synth = new Tone.PolySynth(Tone.Synth).toDestination();
+    // this.synth.set({
+    //   oscillator: { type: "sine", volume: -12 },
+    // });
 
     // If debugging is needed, uncomment the line below.
     // this.synth.debug = true;

@@ -5,7 +5,7 @@ import { Note } from "./note";
 export class Chord {
   private notes: Note[];
 
-  private static DEFAULT_OCTAVE = 4 as Octave;
+  private static DEFAULT_OCTAVE = 3 as Octave;
 
   constructor(private chordOptions: ChordOptions) {
     this.notes = this.buildNotes();
@@ -51,7 +51,6 @@ export class Chord {
     notes = this.modifyInversion(notes);
     notes = this.modifyVoicing(notes);
 
-    console.log("modified");
     for (const note of notes) {
       console.log(note.getMidiNotation());
     }
@@ -80,12 +79,9 @@ export class Chord {
   private modifyInversion(notes: Note[]) {
     // Adjust for inversion.
     const inversion = this.getInversionNumber();
-    if (inversion == 0) {
-      return notes;
-    }
     let notesPostInversion: Note[] = [];
     for (let i = notes.length - 1; i >= 0; i--) {
-      if (i > inversion) {
+      if (i >= inversion) {
         notesPostInversion.unshift(notes[i]);
       } else {
         // Raise the note an octave
@@ -95,7 +91,8 @@ export class Chord {
       }
     }
 
-    if (notesPostInversion[0].getRawNoteId() / 12 >= 5) {
+    // If the first note of the chord starts an octave higher than the default, drop all notes by one octave.
+    if (notesPostInversion[0].getRawNoteId() / 12 >= Chord.DEFAULT_OCTAVE + 1) {
       notesPostInversion = notes.map((note) => {
         note.transposeBySemitones(-12);
         return note;
@@ -120,19 +117,29 @@ export class Chord {
     } else {
       // Double root an octave below.
       const newRoot = new Note(notes[0].getRawNoteId() - 12);
-      notes.unshift(newRoot);
-      for (let i = 2; i < notes.length; i++) {
+      // notes.unshift(newRoot);
+      notes[0].transposeBySemitones(-12);
+      for (let i = 1; i < notes.length; i++) {
         const currRawId = notes[i].getRawNoteId();
         if (currRawId - rootRawId >= 12) {
           // -12 or 0.
           const toTranspose = (Math.floor(Math.random() * 2) - 1) * 12;
           notes[i].transposeBySemitones(toTranspose);
-        } else if (currRawId - rootRawId >= 9 || currRawId - rootRawId == 7) {
+        } else if (
+          currRawId - rootRawId >= 9 ||
+          // currRawId - rootRawId == 7 ||
+          currRawId / 12 > Chord.DEFAULT_OCTAVE
+        ) {
           // Don't transpose notes that are between 9 and 12 semitones above the root and don't transpose the 5th.
           continue;
+        } else if (i == 1) {
+          // First note above the root note should not be transposed down.
+          // +12 or 0.
+          let toTranspose = Math.floor(Math.random() * 2) * 12;
+          notes[i].transposeBySemitones(toTranspose);
         } else {
           // +/- 12 semitones.
-          let toTranspose = (Math.floor(Math.random() * 3) - 1) * 12;
+          let toTranspose = Math.floor(Math.random() * 3 - 1) * 12;
           notes[i].transposeBySemitones(toTranspose);
         }
       }
