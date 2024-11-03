@@ -9,13 +9,13 @@ export class ChordPlayer {
     // TODO: Decide if user should be able to change the tempo.
     Tone.Transport.bpm.value = BPM;
     this.synth = new Tone.Sampler({
-      C2: "samples/C2.mp3",
-      "F#2": "samples/Fsharp2.mp3",
-      C3: "samples/C3.mp3",
-      "F#3": "samples/Fsharp3.mp3",
-      C4: "samples/C4.mp3",
-      "F#4": "samples/Fsharp4.mp3",
-      C5: "samples/C5.mp3",
+      C2: "./samples/C2.mp3",
+      "F#2": "./samples/Fsharp2.mp3",
+      C3: "./samples/C3.mp3",
+      "F#3": "./samples/Fsharp3.mp3",
+      C4: "./samples/C4.mp3",
+      "F#4": "./samples/Fsharp4.mp3",
+      C5: "./samples/C5.mp3",
     }).toDestination();
     const limiter = new Tone.Limiter();
     this.synth.connect(limiter);
