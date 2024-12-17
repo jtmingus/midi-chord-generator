@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.tsx",
@@ -41,5 +42,12 @@ module.exports = {
     static: path.join(__dirname, "dist"),
     compress: true,
     port: 4000,
+    historyApiFallback: true,
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: "index.html",
+      favicon: "favicon.ico",
+    }),
+  ],
 };
