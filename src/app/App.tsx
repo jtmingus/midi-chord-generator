@@ -4,6 +4,7 @@ import { Chord } from "../data_model/chord";
 import { generateRandomChord } from "../data_model/chord_randomizer";
 import { ChordType, NoteId } from "../data_model/types";
 import { useState } from "react";
+import SmartChordBuilder from "../components/SmartChordBuilder";
 
 const DEFAULT_CHORDS = [
   new Chord({ chordBase: NoteId.C, chordType: ChordType.MAJ_VII }),
@@ -15,6 +16,7 @@ const DEFAULT_CHORDS = [
 export default function App() {
   const [chords, setChords] = useState<Chord[]>(DEFAULT_CHORDS);
   const [lockedIds, setLockedIds] = useState<Set<number>>(new Set([]));
+  const [showSmartControls, setShowSmartControls] = useState<boolean>(false);
 
   function randomize() {
     const newChords = [];
@@ -27,7 +29,15 @@ export default function App() {
 
   return (
     <div>
-      <ControlButtons chords={chords} randomize={randomize} />
+      {showSmartControls && <SmartChordBuilder setChords={setChords} />}
+      <ControlButtons
+        chords={chords}
+        randomize={randomize}
+        toggleShowSmartControls={() => {
+          setShowSmartControls(!showSmartControls);
+        }}
+      />
+
       <ChordList
         chords={chords}
         setChords={setChords}
